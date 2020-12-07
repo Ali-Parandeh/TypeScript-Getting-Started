@@ -9,8 +9,19 @@ function getInputValue(elementID: string): string | undefined {
 }
 
 function postScore(score: number, playerName: string = "Multimath Player"): void {
+
+    let logger: (value: string) => void;
+
+    if (score < 0){
+        logger = logError;
+    } else {
+        logger = logMessage;
+    }
+
     const scoreElement: HTMLElement | null = document.getElementById('postedScores');
     scoreElement!.innerText = `${score} - ${playerName}`;
+
+    logger(`Score ${score}`);
 
 }
 
@@ -19,10 +30,17 @@ function startGame(){
     let playerName: string | undefined = getInputValue('playername');
     logPlayer(playerName);
     postScore(80, playerName);
+    postScore(-5, playerName);
 }
 
 function logPlayer(name: string = "Multimath Player"): void {
     console.log(`New game starting for player ${name}`);
+}
+
+const logMessage = (message: string) => console.log(message);
+
+function logError(err: string): void {
+    console.error(err);
 }
 
 document.getElementById('startGame')!.addEventListener('click', startGame);
