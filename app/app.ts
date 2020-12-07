@@ -8,7 +8,7 @@ function getInputValue(elementID: string): string | undefined {
     }
 }
 
-function postScore(score: number, playerName?: string): void {
+function postScore(score: number, playerName: string = "Multimath Player"): void {
     const scoreElement: HTMLElement | null = document.getElementById('postedScores');
     scoreElement!.innerText = `${score} - ${playerName}`;
 
@@ -18,7 +18,7 @@ function startGame(){
     // starting a new game
     let playerName: string | undefined = getInputValue('playername');
     logPlayer(playerName);
-    postScore(100, playerName);
+    postScore(80, playerName);
 }
 
 function logPlayer(name: string = "Multimath Player"): void {
